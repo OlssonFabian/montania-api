@@ -1,9 +1,10 @@
 <?php
     require_once 'classes/api.class.php';
-    use Montania;
-    $products = new Montania\api('https://dev14.ageraehandel.se/sv/api/product');
-    $products->get_all_results($test->url);
-    var_dump($test->decoded_object);
+    use Montania\Api;
+
+    $products = new Api('https://dev14.ageraehandel.se/sv/api/product');
+    $products->get_all_results($products->url);
+    var_dump($products->decoded_object);
 ?>
 
 <html lang="en">

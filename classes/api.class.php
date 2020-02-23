@@ -2,7 +2,7 @@
 
 namespace Montania;
 
-class api{
+class Api{
 
     public $url;
 
