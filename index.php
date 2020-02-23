@@ -1,3 +1,11 @@
+<?php
+    require_once 'classes/api.class.php';
+    use Montania;
+    $products = new Montania\api('https://dev14.ageraehandel.se/sv/api/product');
+    $products->get_all_results($test->url);
+    var_dump($test->decoded_object);
+?>
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
