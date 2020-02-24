@@ -8,6 +8,8 @@
     $products->get_all_results($products->url);
     
     List_options::list_all($products->decoded_object->products);
+    List_options::lowest_price($products->decoded_object->products);
+    //var_dump($products->decoded_object->products);
     
     
     //var_dump($products->decoded_object->products);  
