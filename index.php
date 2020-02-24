@@ -1,10 +1,18 @@
 <?php
     require_once 'classes/api.class.php';
+    require_once 'classes/list-options.class.php';
     use Montania\Api;
+    use Montania\List_options;
 
     $products = new Api('https://dev14.ageraehandel.se/sv/api/product');
     $products->get_all_results($products->url);
-    var_dump($products->decoded_object);
+    
+    List_options::list_all($products->decoded_object->products);
+    
+    
+    //var_dump($products->decoded_object->products);  
+
+
 ?>
 
 <html lang="en">
