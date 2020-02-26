@@ -20,9 +20,9 @@ class List_options {
         echo '<ul>';
         //Loop out sorted array
         foreach ($product_array as $product) {
-            if(isset($product->artiklar_benamning)){
+            if(isset($product->artiklar_benamning) && $product->pris >= 1){
                 //var_dump($product);
-                echo '<li>' . $product->artiklar_benamning . 'pris: ' . $product->pris * 1.25 . ':- </li>';
+                echo '<li>' . $product->artiklar_benamning . ' pris: ' . $product->pris * 1.25 . ':- </li>';
                 if ($product->lagersaldo <= 0){
                     echo '<p>Finns ej i lager</p>';
                 }
@@ -31,7 +31,6 @@ class List_options {
                 }
             }
         }
-
         echo '</ul>';
     }
 
