@@ -22,7 +22,7 @@ class List_options {
         foreach ($product_array as $product) {
             if(isset($product->artiklar_benamning) && $product->pris >= 1){
                 
-                echo '<li>' . $product->artiklar_benamning . ' pris: ' . $product->pris * 1.25 . ':- </li>';
+                echo '<li>' . $product->artiklar_benamning . ' pris: ' . round($product->pris * 1.25) . ':- </li>';
                 if ($product->lagersaldo <= 0){
                     echo '<p>Finns ej i lager</p>';
                 }
