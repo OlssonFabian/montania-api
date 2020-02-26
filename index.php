@@ -6,15 +6,15 @@
 
     $products = new Api('https://dev14.ageraehandel.se/sv/api/product');
     $products->get_all_results($products->url);
+    $array_of_products = $products->decoded_object->products;
     
-    List_options::list_all($products->decoded_object->products);
-    List_options::lowest_price($products->decoded_object->products);
-    List_options::filter_by_categories($products->decoded_object->products,["LJUS"]);
-    //var_dump($products->decoded_object->products);
+    //List_options::list_all($array_of_products);
     
-    
-    //var_dump($products->decoded_object->products);  
+    List_options::lowest_price($array_of_products);
+    List_options::highest_price($array_of_products);
 
+    //List_options::filter_by_categories($array_of_products,["LJUS"]);
+    //--- if you wish to filter for more than one category, just add more items to the array, for example ["LJUS","SERVETT"] will sort the array by both LJUS and SERVETT.
 
 ?>
 
@@ -30,7 +30,86 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+  <div class="accordion" id="accordionExample">
+  <div class="card z-depth-0 bordered">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          <h2>Alla Produkter</h2>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+      data-parent="#accordionExample">
+      <div class="card-body">
+        <?php List_options::list_all($array_of_products); ?>
+      </div>
+    </div>
+  </div>
+  <div class="card z-depth-0 bordered">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <?php echo '<h2>' . 'Ljus' . '</h2>' //could be more dynamic in future version ?> 
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        <?php List_options::filter_by_categories($array_of_products,["LJUS"]); ?>
+      </div>
+    </div>
+  </div>
+  <div class="card z-depth-0 bordered">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <?php echo '<h2>' . 'Porslin' . '</h2>' //could be more dynamic in future version ?>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+       <?php List_options::filter_by_categories($array_of_products,["PORSLIN"]); ?>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card z-depth-0 bordered">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+          data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          <?php echo '<h2>' . 'Lyktor' . '</h2>' //could be more dynamic in future version ?>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+      <div class="card-body">
+       <?php List_options::filter_by_categories($array_of_products,["LYKTOR"]); ?>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card z-depth-0 bordered">
+    <div class="card-header" id="headingFive">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+          data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+          <?php echo '<h2>' . 'Servett' . '</h2>' //could be more dynamic in future version ?>
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+       <?php List_options::filter_by_categories($array_of_products,["SERVETT"]); ?>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -16,12 +16,13 @@ class List_options {
             }
         }
         usort($product_array, "Montania\cmp");
-
+        
+        echo '<ul>';
         //Loop out sorted array
         foreach ($product_array as $product) {
             if(isset($product->artiklar_benamning)){
                 //var_dump($product);
-                echo '<p>' . $product->artiklar_benamning . '</p>';
+                echo '<li>' . $product->artiklar_benamning . 'pris: ' . $product->pris * 1.25 . ':- </li>';
                 if ($product->lagersaldo <= 0){
                     echo '<p>Finns ej i lager</p>';
                 }
@@ -30,6 +31,8 @@ class List_options {
                 }
             }
         }
+
+        echo '</ul>';
     }
 
     public static function filter_by_categories($product_array, $categories){
@@ -38,7 +41,7 @@ class List_options {
             if(isset($product->artiklar_benamning) && isset($product->artikelkategorier_id)){
                 foreach($categories as $category){
                     if($product->artikelkategorier_id == $category){
-                        echo '<p>' . $product->artiklar_benamning . $product->artikelkategorier_id . '</p>';
+                        echo '<p>' . $product->artiklar_benamning . ' kategori: ' . $product->artikelkategorier_id . '</p>';
                     }
                 }
             }
@@ -57,6 +60,19 @@ class List_options {
         });
 
         //Grab the first value, since it's already sorted by value the first price in the array will be the cheapest!
-        echo '<p>Lägsta priset på en artikel är' . round($product_array[0]->pris * 1.25) . '</p>';
+        echo '<p>Lägsta priset på en artikel är ' . round($product_array[0]->pris * 1.25) . ':- </p>';
+    }
+
+    public static function highest_price($product_array){
+        //Sort by price, don't allow the price to be 0 or less!
+        usort($product_array, function($a, $b) {
+            if($a->pris && $b->pris > 0){
+                return ($a->pris - $b->pris) ;
+            }
+        });
+
+        //Grab the last value, since it's already sorted by value the last price in the array will be the most expensive!
+        $most_expensive = end($product_array);
+        echo '<p>Högsta priset på en artikel är ' . round($most_expensive->pris * 1.25) . ':- </p>';
     }
 }
