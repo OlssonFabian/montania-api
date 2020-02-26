@@ -20,12 +20,32 @@ class List_options {
         //Loop out sorted array
         foreach ($product_array as $product) {
             if(isset($product->artiklar_benamning)){
-                var_dump($product->pris);
+                //var_dump($product);
                 echo '<p>' . $product->artiklar_benamning . '</p>';
-                //echo '<p>' . $product->pris . '</p>';
+                if ($product->lagersaldo <= 0){
+                    echo '<p>Finns ej i lager</p>';
+                }
+                else{
+                    echo '<p>Finns i lager</p>';
+                }
             }
         }
     }
+
+    public static function filter_by_categories($product_array, $categories){
+
+        foreach ($product_array as $product) {
+            if(isset($product->artiklar_benamning) && isset($product->artikelkategorier_id)){
+                foreach($categories as $category){
+                    if($product->artikelkategorier_id == $category){
+                        echo '<p>' . $product->artiklar_benamning . $product->artikelkategorier_id . '</p>';
+                    }
+                }
+            }
+        }
+    }
+
+
 
     public static function lowest_price($product_array){
 
@@ -37,6 +57,6 @@ class List_options {
         });
 
         //Grab the first value, since it's already sorted by value the first price in the array will be the cheapest!
-        echo '<p>' . round($product_array[0]->pris * 1.25) . '</p>';
+        echo '<p>Lägsta priset på en artikel är' . round($product_array[0]->pris * 1.25) . '</p>';
     }
 }

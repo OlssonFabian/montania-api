@@ -9,6 +9,7 @@
     
     List_options::list_all($products->decoded_object->products);
     List_options::lowest_price($products->decoded_object->products);
+    List_options::filter_by_categories($products->decoded_object->products,["LJUS"]);
     //var_dump($products->decoded_object->products);
     
     
