@@ -21,7 +21,7 @@ class List_options {
         //Loop out sorted array
         foreach ($product_array as $product) {
             if(isset($product->artiklar_benamning) && $product->pris >= 1){
-                //var_dump($product);
+                
                 echo '<li>' . $product->artiklar_benamning . ' pris: ' . $product->pris * 1.25 . ':- </li>';
                 if ($product->lagersaldo <= 0){
                     echo '<p>Finns ej i lager</p>';
@@ -73,5 +73,10 @@ class List_options {
         //Grab the last value, since it's already sorted by value the last price in the array will be the most expensive!
         $most_expensive = end($product_array);
         echo '<p>Högsta priset på en artikel är ' . round($most_expensive->pris * 1.25) . ':- </p>';
+    }
+
+    public static function number_of_products($product_array){
+        // counting ALL articles, even those with price set to zero or without names and so on
+        echo '<p> antal artiklar i shopen ' . count($product_array) . 'st </p>';
     }
 }

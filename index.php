@@ -12,6 +12,7 @@
     
     List_options::lowest_price($array_of_products);
     List_options::highest_price($array_of_products);
+    List_options::number_of_products($array_of_products);
 
     //List_options::filter_by_categories($array_of_products,["LJUS"]);
     //--- if you wish to filter for more than one category, just add more items to the array, for example ["LJUS","SERVETT"] will sort the array by both LJUS and SERVETT.
